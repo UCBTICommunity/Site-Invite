@@ -1,18 +1,26 @@
 import { Octokit } from "@octokit/core";
 
 let form = document.querySelector(".form");
-let user = document.querySelector(".user");
+let org = document.querySelector(".organization");
 let input = form.querySelector("input[type='text']");
-let text = form.querySelector("p");
+let text = form.querySelector(".invite p");
 
 const octokit = new Octokit({
-  auth: "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",
+  auth: "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",
 });
 
-// inicializeOrgInfo("Organizacao-Catolica");
+let organization = await inicializeOrgInfo("Organizacao-Catolica");
 
 async function inicializeOrgInfo(name) {
-  let org = await githubAPIOrganization(name);
+  let organization = await githubAPIOrganization(name); // inicializar os dados da organizacao
+  org.children[0].src = organization.data.avatar_url;
+  org.children[1].textContent = organization.data.name;
+  org.children[2].textContent = organization.data.description;
+  // org.children[4].children[0].children[1].textContent =
+  //   organization.data.followers;
+  // org.children[4].children[2].children[1].textContent =
+  //   organization.data.following;
+  return organization;
 }
 
 async function githubAPIUser(user) {
@@ -68,11 +76,13 @@ async function githubAPIOrganizationInvite(user) {
   }
 }
 
-let organization = await githubAPIOrganization("Organizacao-Catolica"); // inicializar os dados da organizacao
-
 input.addEventListener("focus", (e) => {
   text.innerText = "";
-  form.classList.remove("error");
+  form.classList.forEach((e) => {
+    if (e !== "form") {
+      form.classList.remove(e);
+    }
+  });
 });
 
 form.addEventListener("submit", (e) => {
@@ -93,14 +103,5 @@ form.addEventListener("submit", (e) => {
       org: organization.data.login,
     });
   }
+  form.classList.add("valid");
 });
-
-// function userValues(data) {
-//   console.log(data);
-//   user.children[0].src = data.data.avatar_url;
-//   user.children[1].textContent = data.data.name;
-//   user.children[2].textContent = data.data.bio;
-//   user.children[3].textContent = data.data.location;
-//   user.children[4].children[0].children[1].textContent = data.data.followers;
-//   user.children[4].children[2].children[1].textContent = data.data.following;
-// }
