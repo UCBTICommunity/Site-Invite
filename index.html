@@ -9,7 +9,7 @@
   </head>
   <body>
     <div id="app">
-      <div class="user">
+      <div class="user hidden">
         <img src="" alt="no img" />
         <p class="name">algum valor</p>
         <p class="bio">teste</p>
@@ -26,9 +26,18 @@
           </div>
         </div>
       </div>
-      <form class="form">
-        <input type="text" name="text" placeholder="digite o seu nome..." />
-        <button type="submit">submit</button>
+      <form class="form error">
+        <div class="organization"></div>
+        <div class="invite">
+          <input
+            type="text"
+            name="text"
+            autocomplete="off"
+            placeholder="digite o seu nome..."
+          />
+          <button type="submit">submit</button>
+          <p class="text">TEXTO</p>
+        </div>
       </form>
     </div>
     <script type="module" src="main.js"></script>
