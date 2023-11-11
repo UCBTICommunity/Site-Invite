@@ -1,198 +1,146 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Helvetica, arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: dark;
-  background-color: #242424;
+  background-color: var(--background);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  --background: #233142;
+  --button: #8ded8e;
+  --card: #455d7a;
+  --input: #e3e3e3;
+}
 
-  --black: 00000;
-  --purple: #646cff;
-  --white: #fff;
-  --red: #de0611;
-  --green: #4bb543;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  font: inherit;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-width: 100vw;
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-#app {
-  max-width: 1280px;
-  height: 100vh;
-  width: 100vw;
-  text-align: center;
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: center;
-  justify-content: space-evenly;
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
 }
 
 .hidden {
   display: none !important;
 }
 
-.user {
-  border: 1px solid var(--white);
-  border-radius: 2rem;
-  width: 25rem;
-  height: 75%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.user img {
-  height: 10rem;
-  border: 5px solid var(--white);
-  border-radius: 50%;
-  object-fit: cover;
-  clip-path: circle(50%);
-}
-
-.number-follow {
-  width: 75%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.number-follow div {
-  width: 40%;
-  display: flex;
-  justify-content: space-around;
-  border: 1px solid var(--white);
-  border-radius: 5rem;
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-button {
-  width: 13rem;
-  border-radius: 0.5rem;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-
-button:hover {
-  border-color: var(--purple);
-}
-
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-.form {
-  width: 25rem;
-  height: 60%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 2rem 0;
-  border: 2px solid var(--white);
-  border-radius: 2.5rem;
-}
-
-.form input[type="text"] {
-  width: 20rem;
-  height: 2.5rem;
-  padding: 0 1rem;
-  border: 2px solid;
-  border-radius: 2rem;
-  outline: none;
-  transition: border-color 0.25s;
-}
-
-.form input[type="text"]:hover,
-.form input[type="text"]:focus {
-  border-color: var(--purple);
-}
-
-.form.error input[type="text"] {
-  border-color: var(--red);
-}
-.form.error .invite p {
-  color: var(--red);
-}
-
-.form .organization {
-  width: 100%;
-  height: 65%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
-  /* border: 2px solid var(--red); */
-}
-
-.form .organization .description {
-  height: 30%;
-  width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.form .organization .name {
-  height: 10%;
-}
-
-.form .organization img {
-  width: 25%;
-  height: 25%;
-  border-radius: 100%;
-}
-
-.form .invite {
-  width: 100%;
-  height: 30%;
+#app {
+  max-width: auto;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
+.form {
+  max-width: 80rem;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  border: 2px solid var(--input);
+  border-radius: 2rem;
+  background-color: var(--card);
+}
+
+.form .organization {
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem 0;
+}
+
+.form .organization img {
+  max-width: 7rem;
+  border-radius: 50%;
+  background-image: none;
+  object-fit: cover;
+}
+
+.form .organization .name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 0 0.5rem;
+}
+
+.form .organization .description {
+  padding: 0 1rem;
+  text-wrap: wrap;
+}
+
+.form .invite {
+  height: 7.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form .invite input[type="text"] {
+  width: 20rem;
+  height: 2.5rem;
+  padding: 0 1rem;
+  border: 2px solid transparent;
+  border-radius: 32px;
+  outline: none;
+  transition: border-color 0.25s ease;
+  background-color: var(--background);
+}
+
+.form .invite input[type="text"]:focus {
+  border-color: var(--);
+}
+
 .form .invite button {
-  margin: 2rem 0 0 0;
+  width: 13rem;
+  border-radius: 0.5rem;
+  border: 2px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--button);
+  color: var(--background);
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
 }
 
-.form.valid input[type="text"] {
-  border-color: var(--green);
+.form .invite input[type="text"]:focus,
+.form .invite input[type="text"]:hover {
+  border-color: var(--input);
 }
 
-.form.valid .invite p {
-  color: var(--green);
+.form .invite button:hover {
+  border-color: var(--background);
+}
+
+.form .invite button:focus,
+.form .invite button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
 }

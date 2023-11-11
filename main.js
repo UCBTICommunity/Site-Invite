@@ -1,4 +1,4 @@
-import { Octokit } from "@octokit/core";
+import { Octokit } from "https://esm.sh/@octokit/core";
 
 let form = document.querySelector(".form");
 let org = document.querySelector(".organization");
@@ -6,13 +6,18 @@ let input = form.querySelector("input[type='text']");
 let text = form.querySelector(".invite p");
 
 const octokit = new Octokit({
-  auth: "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",
+  auth: "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",
 });
 
 let organization = await inicializeOrgInfo("Organizacao-Catolica");
 
 async function inicializeOrgInfo(name) {
-  let organization = await githubAPIOrganization(name); // inicializar os dados da organizacao
+  let organization;
+  try {
+    organization = await githubAPIOrganization(name); // inicializar os dados da organizacao
+  } catch (e) {
+    return false;
+  }
   org.children[0].src = organization.data.avatar_url;
   org.children[1].textContent = organization.data.name;
   org.children[2].textContent = organization.data.description;
@@ -76,7 +81,7 @@ async function githubAPIOrganizationInvite(user) {
   }
 }
 
-input.addEventListener("focus", (e) => {
+input.addEventListener("focus", () => {
   text.innerText = "";
   form.classList.forEach((e) => {
     if (e !== "form") {
@@ -90,8 +95,8 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
   let pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; // regex input
   if (input.value == "") {
-    form.classList.add("error");
-    text.innerText = "nao pode estar em branco";
+    validInvite("error");
+    return;
   } else if (pattern.test(input.value)) {
     result = githubAPIOrganizationInvite({
       email: input.value,
@@ -103,5 +108,22 @@ form.addEventListener("submit", (e) => {
       org: organization.data.login,
     });
   }
-  form.classList.add("valid");
+  validInvite("valid");
 });
+
+function validInvite(valid) {
+  switch (valid) {
+    case "error":
+      form.classList.add("error");
+      text.innerText = "nao pode estar em branco";
+      break;
+    case "valid":
+      form.classList.add("valid");
+      text.innerText =
+        "Convite realizado com sucesso.\nVerifique o Email para aceitar o convite";
+      break;
+    default:
+      break;
+  }
+  text.classList.remove("hidden");
+}
