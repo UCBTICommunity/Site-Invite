@@ -3,11 +3,11 @@ import { Octokit } from "https://esm.sh/@octokit/core";
 let form = document.querySelector(".form");
 let org = document.querySelector(".organization");
 let input = form.querySelector("input[type='text']");
-let text = form.querySelector(".invite p");
+let text = form.querySelector(".text");
 
 const octokit = new Octokit({
-  // auth: "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",
-  auth: import.meta.env.AUTH,
+  auth: "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",
+  // auth: import.meta.env.AUTH,
 });
 
 let organization = await inicializeOrgInfo("UCBDevCommunity");
@@ -91,32 +91,43 @@ input.addEventListener("focus", () => {
   });
 });
 
-form.addEventListener("submit", (e) => {
+form.addEventListener("submit", async (e) => {
   let result;
   e.preventDefault();
   let pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; // regex input
   if (input.value == "") {
     validInvite("error");
-    return;
   } else if (pattern.test(input.value)) {
-    result = githubAPIOrganizationInvite({
+    console.log("entrou no email");
+    result = await githubAPIOrganizationInvite({
       email: input.value,
       org: organization.data.login,
     });
+    result ? validInvite("valid") : validInvite("emailInvalid");
   } else {
-    result = githubAPIOrganizationInvite({
+    result = await githubAPIOrganizationInvite({
       name: input.value,
       org: organization.data.login,
     });
+    console.log(result);
+    result ? validInvite("valid") : validInvite("userInvalid");
   }
-  validInvite("valid");
+  return;
 });
 
 function validInvite(valid) {
   switch (valid) {
     case "error":
       form.classList.add("error");
-      text.innerText = "nao pode estar em branco";
+      text.innerText = "Não pode estar em branco";
+      break;
+    case "emailInvalid":
+      form.classList.add("error");
+      text.innerText = "O email informado não é valido";
+      break;
+    case "userInvalid":
+      form.classList.add("error");
+      text.innerText = "O usuário informado não é valido";
       break;
     case "valid":
       form.classList.add("valid");

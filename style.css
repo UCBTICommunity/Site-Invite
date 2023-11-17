@@ -15,6 +15,8 @@
   --button: #8ded8e;
   --card: #455d7a;
   --input: #e3e3e3;
+  --error: #f94449;
+  --valid: #aef359;
 }
 
 *,
@@ -94,7 +96,7 @@ video {
 }
 
 .form .invite {
-  height: 7.5rem;
+  height: 8rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -112,8 +114,26 @@ video {
   background-color: var(--background);
 }
 
-.form .invite input[type="text"]:focus {
-  border-color: var(--);
+.form .invite .text {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.form.error input[type="text"]:focus,
+.form.error input[type="text"] {
+  border-color: var(--error);
+}
+
+.form.error .text {
+  color: var(--error);
+}
+
+.form.valid input[type="text"] {
+  border-color: var(--valid);
+}
+
+.form.valid .text {
+  color: var(--valid);
 }
 
 .form .invite button {
