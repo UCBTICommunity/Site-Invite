@@ -6,10 +6,11 @@ let input = form.querySelector("input[type='text']");
 let text = form.querySelector(".invite p");
 
 const octokit = new Octokit({
-  auth: "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",
+  // auth: "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",
+  auth: import.meta.env.AUTH,
 });
 
-let organization = await inicializeOrgInfo("Organizacao-Catolica");
+let organization = await inicializeOrgInfo("UCBDevCommunity");
 
 async function inicializeOrgInfo(name) {
   let organization;
