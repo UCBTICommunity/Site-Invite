@@ -6,7 +6,7 @@ let input = form.querySelector("input[type='text']")
 let text = form.querySelector('.text')
 
 const octokit = new Octokit({
-  auth: import.meta.env.AUTH,
+  auth: '  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'.trim(),
 })
 
 let organization = await inicializeOrgInfo('UCBDevCommunity')
