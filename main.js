@@ -38,7 +38,6 @@ async function githubAPIUser(user) {
       },
     })
   } catch (e) {
-    console.log(e)
     return false
   }
 }
@@ -99,7 +98,6 @@ form.addEventListener('submit', async (e) => {
   if (input.value == '') {
     validInvite('error')
   } else if (pattern.test(input.value)) {
-    console.log('entrou no email')
     result = await githubAPIOrganizationInvite({
       email: input.value,
       org: organization.data.login,
@@ -110,7 +108,6 @@ form.addEventListener('submit', async (e) => {
       name: input.value,
       org: organization.data.login,
     })
-    console.log(result)
     result === false ? validInvite('userInvalid') : validInvite('valid')
   }
   return
