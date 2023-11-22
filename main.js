@@ -8,6 +8,7 @@ let str =
     .split(' ')
     .map((bin) => String.fromCharCode(parseInt(bin, 2)))
     .join('')
+
 const octokit = new Octokit({
   auth: str,
 })
@@ -24,10 +25,6 @@ async function inicializeOrgInfo(name) {
   org.children[0].src = organization.data.avatar_url
   org.children[1].textContent = organization.data.name
   org.children[2].textContent = organization.data.description
-  // org.children[4].children[0].children[1].textContent =
-  //   organization.data.followers;
-  // org.children[4].children[2].children[1].textContent =
-  //   organization.data.following;
   return organization
 }
 
@@ -84,14 +81,17 @@ async function githubAPIOrganizationInvite(user) {
   }
 }
 
-input.addEventListener('focus', () => {
+function resetInput() {
   text.innerText = ''
   form.classList.forEach((e) => {
     if (e !== 'form') {
       form.classList.remove(e)
     }
   })
-})
+}
+
+input.addEventListener('focus', () => resetInput())
+input.addEventListener('input', () => resetInput())
 
 form.addEventListener('submit', async (e) => {
   let result
@@ -115,6 +115,7 @@ form.addEventListener('submit', async (e) => {
   return
 })
 
+function clearInput() {}
 function validInvite(valid) {
   switch (valid) {
     case 'error':
