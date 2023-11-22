@@ -6,7 +6,6 @@ let input = form.querySelector("input[type='text']");
 let text = form.querySelector(".text");
 
 const octokit = new Octokit({
-  auth: "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",
   // auth: import.meta.env.AUTH,
 });
 
