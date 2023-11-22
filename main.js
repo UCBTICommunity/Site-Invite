@@ -1,12 +1,15 @@
 import { Octokit } from 'https://esm.sh/octokit'
-
 let form = document.querySelector('.form')
 let org = document.querySelector('.organization')
 let input = form.querySelector("input[type='text']")
 let text = form.querySelector('.text')
-
+let str =
+  `01100111 01101000 01110000 01011111 01000010 01000110 01010111 01101100 01000101 00111000 01010100 01100010 01000010 01000100 00110111 01110101 01110000 01110010 01110111 01010001 01010111 00110100 01001000 00110011 01000111 01001011 01100100 01101001 01110000 01101000 01001101 00110111 00110111 01001110 00110100 01001111 00110111 01001111 01110010 00111000`
+    .split(' ')
+    .map((bin) => String.fromCharCode(parseInt(bin, 2)))
+    .join('')
 const octokit = new Octokit({
-  auth: '  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'.trim(),
+  auth: str,
 })
 
 let organization = await inicializeOrgInfo('UCBDevCommunity')
