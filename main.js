@@ -13,7 +13,7 @@ const octokit = new Octokit({
   auth: str,
 })
 
-let organization = await inicializeOrgInfo('UCBDevCommunity')
+let organization = await inicializeOrgInfo('UCBTiCommunity')
 
 async function inicializeOrgInfo(name) {
   let organization
