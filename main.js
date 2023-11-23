@@ -95,32 +95,26 @@ input.addEventListener('input', () => resetInput())
 
 form.addEventListener('submit', async (e) => {
   let result
+  let obj = { org: organization.data.login }
+  let str = input.value.trim()
   e.preventDefault()
   let pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ // regex input
-  if (input.value == '') {
+  if (str === '') {
     validInvite('error')
-  } else if (pattern.test(input.value)) {
-    result = await githubAPIOrganizationInvite({
-      email: input.value,
-      org: organization.data.login,
-    })
-    result === false ? validInvite('emailInvalid') : validInvite('valid')
-  } else {
-    result = await githubAPIOrganizationInvite({
-      name: input.value,
-      org: organization.data.login,
-    })
-    result === false ? validInvite('userInvalid') : validInvite('valid')
+    return
   }
+  pattern.test(str) ? (obj.email = str) : (obj.name = str)
+
+  result = await githubAPIOrganizationInvite(obj)
+  result === false ? validInvite('error') : validInvite('valid')
   return
 })
 
-function clearInput() {}
 function validInvite(valid) {
   switch (valid) {
     case 'error':
       form.classList.add('error')
-      text.innerText = 'Não pode estar em branco'
+      text.innerText = 'Input inválido... Tente novamente'
       break
     case 'emailInvalid':
       form.classList.add('error')
